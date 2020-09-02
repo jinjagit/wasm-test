@@ -1,5 +1,5 @@
 [package]
-name = "wasm-template-rust"
+name = "wasm-test"
 version = "0.1.0"
 authors = ["sn99 <siddharthn.099@gmail.com>"]
 edition = "2018"

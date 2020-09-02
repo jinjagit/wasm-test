@@ -18,7 +18,7 @@ extern {
 
 #[wasm_bindgen]
 pub fn greet() {
-    alert("Hello, wasm-template-rust!");
+    alert("Hello, from Rust compiled to wasm!");
 }
 
 #[cfg(test)]
