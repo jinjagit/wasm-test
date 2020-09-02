@@ -52,3 +52,71 @@ Licensed under either of these:
    https://www.apache.org/licenses/LICENSE-2.0)
  * MIT license ([LICENSE-MIT](LICENSE-MIT) or
    https://opensource.org/licenses/MIT)
+
+
+--------------------------------------------------------------  
+
+## My steps to get Rust compiled to wasm in Travis CI deploy (for this repo, which is also a npm managed package):  
+
+cloned https://github.com/sn99/wasm-template-rust  
+
+created new dir: repos/wasm-test + `git init`  
+
+Copied contents into new directory (repos/wasm-test)  
+& added .gitignore & .travis.yml + copied each file's contents from the cloned repo.  
+
+created repo on GitHub with appropriate name (wasm-test), with no readme  
+
+`cd wasm-test`  
+
+`git add .`  
+`git commit -m "initial commit"`  
+
+`git remote add origin git@github.com:jinjagit/wasm-test.git`  
+`git push origin master`  
+
+changed name in cargo.toml to `name = "wasm-test"`  
+
+changed lines in www/package.json to:  
+```
+"dependencies": {
+    "wasm-template-rust": "file:../pkg"
+  },
+  ```
+
+changed lines in src/lib.rs to:  
+```
+pub fn greet() {
+  alert("Hello, from Rust compiled to wasm!");
+}
+```
+(just to prove I am building a new change in the Rust code)  
+
+in project root:  
+`wasm-pack build`  
+
+in www directory:  
+`npm install`  
+
+changed line in www/index.js to `import * as wasm from "wasm-test";`  
+
+`npm install` again  
+
+`npm run start` => runs @ http://localhost:8080/  
+
+`git add .`  
+`git commit -m "modify to my changes"`  
+`git push origin master`  
+
+created gh-pages branch on GitHub  
+
+created GitHub personal access token  
+
+went to: https://travis-ci.com/signin and signed in with GitHub  
+Approved the installation of Travis CI for all my GitHub repos.  
+Found wasm-test in repos list  
+clicked 'settings' for repo.  
+Added env. var: `GITHUB_TOKEN` value: \<personal access token value\>  
+Selected 'Trigger build' from settings and ran with no custom settings  
+
+=> IT LIVES!! (running @ https://jinjagit.github.io/wasm-test/)  
