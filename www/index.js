@@ -26,7 +26,7 @@ wasmText.innerHTML = `wasm called from JS: ${t2} ms, with final result = ${resul
 let summaryText = document.getElementById("summary-text");
 
 if (t1 < t2) {
-  summaryText.innerHTML = `wasm ran benchmark ${t2 / t1} SLOWER than Javascript`;
+  summaryText.innerHTML = `wasm ran benchmark ${t2 / t1} times SLOWER than Javascript`;
 } else {
-  summaryText.innerHTML = `wasm ran benchmark ${t1 / t2} faster than Javascript`;
+  summaryText.innerHTML = `wasm ran benchmark ${t1 / t2} times faster than Javascript`;
 }
