@@ -1,6 +1,6 @@
-# Steps to develop and deploy wasm (compiled from Rust) + JS:
+# Develop and deploy wasm (compiled from Rust) + JS:
 
-### Note: this process uses Travis CI deploy to deploy to GitHub Pages.
+### Note: this process uses Travis CI to deploy to GitHub Pages.
 
 Cloned https://github.com/sn99/wasm-template-rust  
 (see this repo. for Siddharth Naithani's excellent template and readme. This was invaluable to me in getting the Travis CI to deploy the wasm package)  
