@@ -17,8 +17,8 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 // }
 
 #[wasm_bindgen]
-pub fn times_two(x: i32) -> i32 {
-    let y: i32 = x * 2;
+pub fn times_two(x: f32) -> f32 {
+    let y: f32 = x * 2.0;
     y
 }
 
