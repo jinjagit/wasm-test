@@ -11,11 +11,6 @@ use wasm_bindgen::prelude::*;
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
-// #[wasm_bindgen]
-// extern {
-//     fn alert(s: &str);
-// }
-
 #[wasm_bindgen]
 pub fn sine_series(n: i32) -> f32 {
     let mut counter = 1;
@@ -28,12 +23,4 @@ pub fn sine_series(n: i32) -> f32 {
     }
 
     result
-}
-
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
-    }
 }
