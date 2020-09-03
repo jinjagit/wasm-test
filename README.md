@@ -2,15 +2,15 @@
 
 ### Note: this process uses Travis CI to deploy to GitHub Pages.
 
-Cloned https://github.com/sn99/wasm-template-rust  
+Clone https://github.com/sn99/wasm-template-rust  
 (see this repo. for Siddharth Naithani's excellent template and readme. This was invaluable to me in getting the Travis CI to deploy the wasm package)  
 
-Created new directory: repos/wasm-test + `git init`  
+Create new directory: repos/wasm-test + `git init`  
 
-Copied contents into new directory (repos/wasm-test)  
-& added .gitignore & .travis.yml + copied each file's contents from the cloned repo.  
+Copy contents into new directory (repos/wasm-test)  
+& add .gitignore & .travis.yml + copy each file's contents from the cloned repo.  
 
-Created repo on GitHub with appropriate name (wasm-test), with no readme  
+Create repo on GitHub with appropriate name (wasm-test), with no readme  
 
 `cd wasm-test`  
 
@@ -20,22 +20,22 @@ Created repo on GitHub with appropriate name (wasm-test), with no readme
 `git remote add origin git@github.com:jinjagit/wasm-test.git`  
 `git push origin master`  
 
-Changed name in cargo.toml to `name = "wasm-test"`  
+Change name in cargo.toml to `name = "wasm-test"`  
 
-Changed lines in www/package.json to:  
+Change lines in www/package.json to:  
 ```
 "dependencies": {
     "wasm-test": "file:../pkg"
   },
   ```
 
-Changed lines in src/lib.rs to:  
+Change lines in src/lib.rs to:  
 ```
 pub fn greet() {
   alert("Hello, from Rust compiled to wasm!");
 }
 ```
-(just to prove I am building from a new change in the Rust code)  
+(just to prove we are building from a new change in the Rust code)  
 
 In project root:  
 `wasm-pack build`  
@@ -43,8 +43,8 @@ In project root:
 In www directory:  
 `npm install`  
 
-Changed line in www/index.js to `import * as wasm from "wasm-test";`  
-Changed line in www/index.html to `<title>Wasm test</title>`  
+Change line in www/index.js to `import * as wasm from "wasm-test";`  
+Change line in www/index.html to `<title>Wasm test</title>`  
 
 `npm install` again  
 
@@ -55,25 +55,25 @@ Changed line in www/index.html to `<title>Wasm test</title>`
 `git commit -m "modify to my changes"`  
 `git push origin master`  
 
-Created gh-pages branch on GitHub  
+Create gh-pages branch on GitHub  
 
-Created GitHub personal access token  
+Create GitHub personal access token  
 
-Went to: https://travis-ci.com/signin and signed in with GitHub  
-Approved the installation of Travis CI for all my GitHub repos.  
-Found wasm-test in repos list  
-Clicked 'settings' for repo.  
-Added env. var: `GITHUB_TOKEN` value: \<personal access token value\>  
-Selected 'Trigger build' from settings and ran with no custom settings  
+Go to: https://travis-ci.com/signin and sign in with GitHub  
+Approve the installation of Travis CI for all GitHub repos, or just this repo.  
+Find wasm-test in repos list  
+Click 'settings' for repo.  
+Add env. var: `GITHUB_TOKEN` value: \<personal access token value\>  
+Select 'Trigger build' from settings and run with no custom settings  
 
 => IT LIVES!! (running @ https://jinjagit.github.io/wasm-test/) 
 
-I then rewrote index.js to run the benchmarks it now runs, and index.html to include \<p\> elements for displaying information and benchmark results on page.  
-I also rewrote the Rust src/lib.rs file to contain the sine_series(n) function needed for the wasm benchmark, and deleted unused function + `extern` statements from lib.rs.
+Then, rewrite index.js to run the benchmarks it now runs, and index.html to include \<p\> elements for displaying information and benchmark results on page.  
+Then, rewrite the Rust src/lib.rs file to contain the sine_series(n) function needed for the wasm benchmark, and delete unused function + `extern` statements from lib.rs.
 
 `wasm-pack build` (from project root)
 
-Lastly, I added and commited changes and pushed to GitHub, and the Travis CI took care of deploying the package to GitHub Pages :-)
+Lastly, add and commit changes and push to GitHub, and the Travis CI will take care of deploying the package to GitHub Pages :-)
 
 ## License
 
