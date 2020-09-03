@@ -74,3 +74,12 @@ I also rewrote the Rust src/lib.rs file to contain the sine_series(n) function n
 `wasm-pack build` (from project root)
 
 Lastly, I added and commited changes and pushed to GitHub, and the Travis CI took care of deploying the package to GitHub Pages :-)
+
+## License
+
+Licensed under either of these:
+
+ * Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or
+   https://www.apache.org/licenses/LICENSE-2.0)
+ * MIT license ([LICENSE-MIT](LICENSE-MIT) or
+   https://opensource.org/licenses/MIT)

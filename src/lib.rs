@@ -1,3 +1,6 @@
+// adapted from Siddharth Naithani's original file, 2020
+// https://github.com/sn99/wasm-template-rust/blob/master/src/lib.rs
+
 mod utils;
 
 use wasm_bindgen::prelude::*;
