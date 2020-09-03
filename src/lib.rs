@@ -17,9 +17,17 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 // }
 
 #[wasm_bindgen]
-pub fn times_two(x: f32) -> f32 {
-    let y: f32 = x * 2.0;
-    y
+pub fn sine_series(n: i32) -> f32 {
+    let mut counter = 1;
+    let stop = n + 1;
+    let mut result: f32 = 0.0;
+
+    while counter != stop {
+        result = result + (counter as f32).sin();
+        counter += 1;
+    }
+
+    result
 }
 
 #[cfg(test)]
