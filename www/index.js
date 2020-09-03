@@ -12,19 +12,21 @@ const sineSeries = (n) => {
 let jsText = document.getElementById("js-text");
 let start = Date.now();
 let result1 = sineSeries(10000000);
-let end = Date.now() - start;
+let t1 = Date.now() - start;
 
-
-jsText.innerHTML = `Javascript only: ${end} ms, with final result = ${result1}`;
+jsText.innerHTML = `Javascript only: ${t1} ms, with final result = ${result1}`;
 
 let wasmText = document.getElementById("wasm-text");
-
 start = Date.now();
-
 let result2 = wasm.sine_series(10000000);
+let t2 = Date.now() - start;
 
-end = Date.now() - start;
+wasmText.innerHTML = `wasm called from JS: ${t2} ms, with final result = ${result2}`;
 
-wasmText.innerHTML = `wasm called from JS: ${end} ms, with final result = ${result2}`;
+let summaryText = document.getElementById("summary-text");
 
-console.log(result2);
+if (t1 < t2) {
+  summaryText.innerHTML = `wasm ran benchmark ${t2 / t1} SLOWER than Javascript`;
+} else {
+  summaryText.innerHTML = `wasm ran benchmark ${t1 / t2} faster than Javascript`;
+}
