@@ -38,3 +38,36 @@ pub fn sine_series_f64(n: i32) -> f64 {
 
     result
 }
+
+// https://rustwasm.github.io/docs/wasm-bindgen/reference/types/boxed-number-slices.html
+
+#[wasm_bindgen]
+pub fn take_boxed_number_slice_by_value(x: Box<[f64]>) {}
+
+// returns an array (containing 0..42) to JS
+#[wasm_bindgen]
+pub fn return_boxed_number_slice() -> Box<[u32]> {
+    (0..42).collect::<Vec<u32>>().into_boxed_slice()
+}
+
+#[wasm_bindgen]
+pub fn take_option_boxed_number_slice(x: Option<Box<[u8]>>) {}
+
+#[wasm_bindgen]
+pub fn return_option_boxed_number_slice() -> Option<Box<[i32]>> {
+    None
+}
+
+// Example function that receives array from JS, mutates and returns it:
+#[wasm_bindgen]
+pub fn add_one_to_each(x: Box<[u8]>) -> Box<[u8]> {
+    let mut vec = Vec::new();
+    
+    for element in x.iter() {
+        vec.push(element + 1);
+    }
+
+    let boxed: Box<[u8]> = vec.into_boxed_slice();
+    
+    boxed
+}

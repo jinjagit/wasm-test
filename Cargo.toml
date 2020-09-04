@@ -24,3 +24,8 @@ version = "0.3.35"
 features = [
   "console",
 ]
+
+# resolves `Fatal: error in validating input` error on was-pack build, from:
+# https://github.com/cloudflare/wrangler/issues/1474
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = false
