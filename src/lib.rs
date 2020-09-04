@@ -4,6 +4,11 @@
 mod utils;
 
 use wasm_bindgen::prelude::*;
+use wasm_timer::Instant;
+
+// NOTE: wasm-timer might panic on Mac OSX. Cannot find alternative.
+// std::time stuff, whether or not via wasm-timer, fail as 'unreachable'
+// Only used for benchmarking, so not otherwise mission-critical.
 
 // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
 // allocator.
@@ -58,7 +63,7 @@ pub fn return_option_boxed_number_slice() -> Option<Box<[i32]>> {
     None
 }
 
-// Example function that receives array from JS, mutates and returns it:
+// Example function that receives array from JS, and returns a mutated copy:
 #[wasm_bindgen]
 pub fn add_one_to_each(x: Box<[u8]>) -> Box<[u8]> {
     let mut vec = Vec::new();
@@ -68,6 +73,24 @@ pub fn add_one_to_each(x: Box<[u8]>) -> Box<[u8]> {
     }
 
     let boxed: Box<[u8]> = vec.into_boxed_slice();
+    
+    boxed
+}
+
+// Benchmark summing an array:
+#[wasm_bindgen]
+pub fn sum_u32() -> Box<[u64]> {
+    let v: Vec<u32> = (1..100000001).collect();
+
+    let start = Instant::now();
+    
+    let sum: u64 = v.iter().map(|x| *x as u64).sum();
+
+    let now = Instant::now();
+    let elapsed: u64 = now.duration_since(start).as_millis() as u64;
+
+    let results: Vec<u64> = vec![sum, elapsed];
+    let boxed: Box<[u64]> = results.into_boxed_slice();
     
     boxed
 }

@@ -5,12 +5,16 @@
     <title>Wasm test</title>
 </head>
 <body>
-    <b>Benchmark of 10,000,000 iterations: sin(1) + sin(2) + sin(3) ... + sin(10000000)</b>
-    <p id="js-text"></p>
+    <b>10,000,000 iterations: sin(1) + sin(2) + sin(3) ... + sin(10000000)</b>
+    <p id="js-f-text"></p>
     <p id="wasm-f32-text"></p>
     <p id="summary-f32-text"></p>
     <p id="wasm-f64-text"></p>
     <p id="summary-f64-text"></p>
+    <b>Sum 100,000,000 elements of array: [1..100000000] *Might panic on Mac OSX</b>
+    <p id="js-ary-text"></p>
+    <p id="wasm-ary-text"></p>
+    <p id="summary-ary-text"></p>
 <script src="./bootstrap.js"></script>
 <noscript>This page contains webassembly and javascript content, please enable javascript in your browser.</noscript>
 </body>

@@ -19,15 +19,26 @@ const sineSeries = (n) => {
   return result;
 }
 
+const createArrayOfInts = (n) => {
+  let ary = [];
+
+  for (let i = 1; i < n + 1; i++) {
+    ary.push(i);
+  }
+
+  return ary;
+}
+
+
 // Benchmark of 10,000,000 iterations:
 // sin(1) + sin(2) + sin(3) ... + sin(10000000)
 
 // JS benchmark
-let jsText = document.getElementById("js-text");
+let jsFText = document.getElementById("js-f-text");
 let start = Date.now();
 let result1 = sineSeries(10000000);
 let t1 = Date.now() - start;
-jsText.innerHTML = `Javascript only (64-bit floats): ${t1} ms, with final result = ${result1}`;
+jsFText.innerHTML = `Javascript only (64-bit floats): ${t1} ms, with final result = ${result1}`;
 
 // wasm f32 benchmark
 let wasmF32Text = document.getElementById("wasm-f32-text");
@@ -53,13 +64,26 @@ compareResults(summaryF64Text, t1, t3);
 
 
 
-// tests of passing / receiving arrays to/from wasm:
+// Benchmark of summing elements of array
+// sum [1..1000000]
+// NOTE: Might panic on OSX due to Rust wasm-timer 'unreachable' error.
 
-let ary = wasm.return_boxed_number_slice();
-console.log(ary);
+// JS benchmark
+let ary = createArrayOfInts(100000000);
 
-let test = new Uint8Array(100);
-console.log(test);
+let jsAryText = document.getElementById("js-ary-text");
+start = Date.now();
 
-let testResult = wasm.add_one_to_each(test);
-console.log(testResult);
+let sum1 = ary.reduce((x, y) => x + y, 0);
+let t4 = Date.now() - start;
+jsAryText.innerHTML = `Javascript only: ${t4} ms, with final result = ${sum1}`;
+
+//wasm benchmark
+let wasmAryText = document.getElementById("wasm-ary-text");
+let wasmAryResults = wasm.sum_u32();
+let t5 = Number(wasmAryResults[1]);
+wasmAryText.innerHTML = `wasm called from JS: ${wasmAryResults[1]} ms, with final result = ${wasmAryResults[0]}`;
+
+// compare results
+let summaryAryText = document.getElementById("summary-ary-text");
+compareResults(summaryAryText, t4, t5);
