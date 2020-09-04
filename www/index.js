@@ -9,6 +9,16 @@ const sineSeries = (n) => {
   return result;
 }
 
+const compareResults = (textElement, tJS, tWasm) => {
+  if (tJS < tWasm) {
+    textElement.innerHTML = `wasm ran benchmark ${(tWasm / tJS).toFixed(2)} times SLOWER than Javascript`;
+    textElement.style.color = "red";
+  } else {
+    textElement.innerHTML = `wasm ran benchmark ${(tJS / tWasm).toFixed(2)} times faster than Javascript`;
+    textElement.style.color = "green";
+  }
+}
+
 // JS benchmark
 let jsText = document.getElementById("js-text");
 let start = Date.now();
@@ -27,14 +37,7 @@ wasmF32Text.innerHTML = `wasm (32-bit floats) called from JS: ${t2} ms, with fin
 
 // compare results
 let summaryF32Text = document.getElementById("summary-f32-text");
-
-if (t1 < t2) {
-  summaryF32Text.innerHTML = `wasm ran benchmark ${(t2 / t1).toFixed(2)} times SLOWER than Javascript`;
-  summaryF32Text.style.color = "red";
-} else {
-  summaryF32Text.innerHTML = `wasm ran benchmark ${(t1 / t2).toFixed(2)} times faster than Javascript`;
-  summaryF32Text.style.color = "green";
-}
+compareResults(summaryF32Text, t1, t2);
 
 // wasm f64 benchmark
 let wasmF64Text = document.getElementById("wasm-f64-text");
@@ -46,11 +49,4 @@ wasmF64Text.innerHTML = `wasm (64-bit floats) called from JS: ${t3} ms, with fin
 
 // compare results
 let summaryF64Text = document.getElementById("summary-f64-text");
-
-if (t1 < t3) {
-  summaryF64Text.innerHTML = `wasm ran benchmark ${(t3 / t1).toFixed(2)} times SLOWER than Javascript`;
-  summaryF64Text.style.color = "red";
-} else {
-  summaryF64Text.innerHTML = `wasm ran benchmark ${(t1 / t3).toFixed(2)} times faster than Javascript`;
-  summaryF64Text.style.color = "green";
-}
+compareResults(summaryF64Text, t1, t3);
