@@ -12,13 +12,13 @@ use wasm_bindgen::prelude::*;
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[wasm_bindgen]
-pub fn sine_series(n: i32) -> f32 {
+pub fn sine_series(n: i32) -> f64 {
     let mut counter = 1;
     let stop = n + 1;
-    let mut result: f32 = 0.0;
+    let mut result: f64 = 0.0;
 
     while counter != stop {
-        result = result + (counter as f32).sin();
+        result = result + (counter as f64).sin();
         counter += 1;
     }
 
