@@ -30,6 +30,8 @@ let summaryText = document.getElementById("summary-text");
 
 if (t1 < t2) {
   summaryText.innerHTML = `wasm ran benchmark ${(t2 / t1).toFixed(2)} times SLOWER than Javascript`;
+  summaryText.style.color = "red";
 } else {
   summaryText.innerHTML = `wasm ran benchmark ${(t1 / t2).toFixed(2)} times faster than Javascript`;
+  summaryText.style.color = "green";
 }
