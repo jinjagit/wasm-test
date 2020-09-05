@@ -93,7 +93,3 @@ const main = (() => {
   iterationsBenchmark();
   arraySumBenchmark();
 })();
-
-
-
-
